@@ -58,6 +58,8 @@ import java.util.Locale;
 import gun0912.tedbottompicker.adapter.GalleryAdapter;
 import gun0912.tedbottompicker.util.RealPathUtil;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private static final String EXTRA_CAMERA_IMAGE_URI = "camera_image_uri";
@@ -316,11 +318,10 @@ public class TedBottomSheetDialogFragment extends BottomSheetDialogFragment {
         if (builder.imageProvider == null) {
             Glide.with(getActivity())
                     .load(uri)
-                    .thumbnail(0.1f)
                     .apply(new RequestOptions()
                             .centerCrop()
-                            .placeholder(R.drawable.ic_gallery)
                             .error(R.drawable.img_error))
+                    .transition(withCrossFade())
                     .into(thumbnail);
         } else {
             builder.imageProvider.onProvideImage(thumbnail, uri);

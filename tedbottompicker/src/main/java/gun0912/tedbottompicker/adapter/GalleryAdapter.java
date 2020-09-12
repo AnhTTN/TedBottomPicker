@@ -27,6 +27,8 @@ import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 import gun0912.tedbottompicker.view.TedSquareFrameLayout;
 import gun0912.tedbottompicker.view.TedSquareImageView;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 /**
  * Created by TedPark on 2016. 8. 30..
  */
@@ -72,8 +74,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
             }
 
 
-
-
             cursor = context.getApplicationContext().getContentResolver().query(uri, columns, null, null, orderBy);
             //imageCursor = sContext.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, orderBy);
 
@@ -86,7 +86,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                     String dataIndex;
                     if (builder.mediaType == TedBottomSheetDialogFragment.BaseBuilder.MediaType.IMAGE) {
                         dataIndex = MediaStore.Images.Media.DATA;
-                    }else{
+                    } else {
                         dataIndex = MediaStore.Video.VideoColumns.DATA;
                     }
                     String imageLocation = cursor.getString(cursor.getColumnIndex(dataIndex));
@@ -159,10 +159,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
             if (builder.imageProvider == null) {
                 Glide.with(context)
                         .load(uri)
-                        .thumbnail(0.1f)
                         .apply(new RequestOptions().centerCrop()
-                                .placeholder(R.drawable.ic_gallery)
                                 .error(R.drawable.img_error))
+                        .transition(withCrossFade())
                         .into(holder.iv_thumbnail);
             } else {
                 builder.imageProvider.onProvideImage(holder.iv_thumbnail, uri);
