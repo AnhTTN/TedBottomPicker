@@ -39,6 +39,7 @@ configurations {
 repositories {
     mavenCentral()
     google()
+    maven { url 'https://jitpack.io' }
 }
 
 
@@ -51,7 +52,7 @@ dependencies {
     javadocDeps 'com.android.support:support-annotations:27.1.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'gun0912.ted:tedonactivityresult:1.0.6'
+    implementation 'com.github.AnhTTN:TedRxOnActivityResult:1.0.9'
     implementation "io.reactivex.rxjava2:rxjava:2.2.6"
 }
 
